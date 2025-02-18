@@ -5,16 +5,16 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-gray-0 p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="text-white text-xl font-bold flex items-center">
           <img
-            src="/api/placeholder/40/40"
+            src="/records/placeholder.png"
             alt="Logo"
-            className="h-10 w-10 mr-2"
+            className="h-20 w-27 mr-2"
           />
-          <span>Brand Name</span>
+          <span>TranceMania</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -26,10 +26,10 @@ export default function NavBar() {
             Home
           </Link>
           <Link
-            to="/products"
+            to="/records"
             className="text-gray-300 hover:text-white transition-colors"
           >
-            Products
+            Records
           </Link>
           <Link
             to="/about"

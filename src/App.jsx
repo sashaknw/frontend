@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import AllProductsPage from "./pages/AllProductsPage";
+import AllRecordsPage from "./pages/AllRecordsPage";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
@@ -14,7 +14,7 @@ function App() {
         <main className="container mx-auto px-4">
           <Routes>
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/products" element={<AllProductsPage />} />
+            <Route path="/records" element={<AllRecordsPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </main>

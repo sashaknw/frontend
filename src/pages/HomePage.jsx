@@ -1,5 +1,7 @@
 
-import Carousel from "../components/Carousel";
+
+import ProductCard from "../components/RecordCard";
+
 
 const HomePage = () => {
   return (
@@ -9,8 +11,12 @@ const HomePage = () => {
       <div className="big-cover">
         <h1>Big Cover</h1>
       </div>
-      <div className="carousel-container-home">
-        < Carousel />
+    
+      <div className="product-cards-container">
+      
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </div>
 
     </div>
