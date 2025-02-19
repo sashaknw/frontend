@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import RecordCard from "../components/RecordCard";
 import { fetchRecords } from "../services/api";
+import AddRecordCard from "../components/AddRecordCard";
+import AddRecordButton from "../components/AddRecordButton";
 
-const AllRecordsPage = () => {
+const AllRecordsPage = ({ addToCart }) => {
   const [records, setRecords] = useState([]);
+  const [selectedRecord, setSelectedRecord] = useState(null);
   const [filteredRecords, setFilteredRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +14,7 @@ const AllRecordsPage = () => {
   const [searchStyle, setSearchStyle] = useState("");
   const [searchCountry, setSearchCountry] = useState("");
   const [yearSort, setYearSort] = useState("");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadRecords = async () => {
@@ -19,11 +22,14 @@ const AllRecordsPage = () => {
         setIsLoading(true);
         const data = await fetchRecords();
 
- 
+        // Validate and filter records
         const recordsToSet = Array.isArray(data) ? data : data.records || [];
+        const validRecords = recordsToSet.filter(
+          (record) => record && record.id && record.artist && record.title
+        );
 
-        setRecords(recordsToSet);
-        setFilteredRecords(recordsToSet);
+        setRecords(validRecords);
+        setFilteredRecords(validRecords);
       } catch (err) {
         setError(err);
         console.error("Failed to fetch records:", err);
@@ -37,7 +43,6 @@ const AllRecordsPage = () => {
     loadRecords();
   }, []);
 
-
   useEffect(() => {
     let result = records;
 
@@ -49,7 +54,6 @@ const AllRecordsPage = () => {
       );
     }
 
-  
     if (searchStyle) {
       result = result.filter((record) =>
         record.style
@@ -68,18 +72,14 @@ const AllRecordsPage = () => {
 
     if (yearSort === "asc") {
       result.sort((a, b) => {
-        const yearA =
-          typeof a.released === "number" ? a.released : parseInt(a.released);
-        const yearB =
-          typeof b.released === "number" ? b.released : parseInt(b.released);
+        const yearA = Number(a.released) || 0;
+        const yearB = Number(b.released) || 0;
         return yearA - yearB;
       });
     } else if (yearSort === "desc") {
       result.sort((a, b) => {
-        const yearA =
-          typeof a.released === "number" ? a.released : parseInt(a.released);
-        const yearB =
-          typeof b.released === "number" ? b.released : parseInt(b.released);
+        const yearA = Number(a.released) || 0;
+        const yearB = Number(b.released) || 0;
         return yearB - yearA;
       });
     }
@@ -103,6 +103,35 @@ const AllRecordsPage = () => {
     ),
   ].sort();
 
+   const handleUpdate = (updatedRecord) => {
+     setRecords((prevRecords) =>
+       prevRecords.map((record) =>
+         record.id === updatedRecord.id ? updatedRecord : record
+       )
+     );
+     setFilteredRecords((prevFilteredRecords) =>
+       prevFilteredRecords.map((record) =>
+         record.id === updatedRecord.id ? updatedRecord : record
+       )
+     );
+   };
+
+  const handleAddRecord = (newRecord) => {
+    const updatedRecords = [newRecord, ...records];
+    setRecords(updatedRecords);
+    setFilteredRecords(updatedRecords);
+  };
+
+  const handleDelete = (deletedId) => {
+    // Update the records state immediately after successful deletion
+    setRecords((prevRecords) =>
+      prevRecords.filter((record) => record.id !== deletedId)
+    );
+    setFilteredRecords((prevFilteredRecords) =>
+      prevFilteredRecords.filter((record) => record.id !== deletedId)
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -123,12 +152,11 @@ const AllRecordsPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 relative bg-[#1a1a1a] min-h-screen text-white">
       <h1 className="text-3xl font-bold text-center mb-8">
         Our Vinyl Collection
       </h1>
 
-     
       <div className="mb-8 flex flex-wrap justify-center gap-4">
         <div className="w-full md:w-1/3 lg:w-1/4">
           <input
@@ -202,21 +230,42 @@ const AllRecordsPage = () => {
         </div>
       </div>
 
-  
       {filteredRecords.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <AddRecordCard
+            onAddRecord={handleAddRecord}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            uniqueStyles={uniqueStyles}
+          />
           {filteredRecords.map((record) =>
             record && record.id ? (
-              <RecordCard key={record.id} record={record} />
+              <RecordCard
+                key={record.id}
+                record={record}
+                addToCart={addToCart}
+                uniqueStyles={uniqueStyles}
+                onDelete={handleDelete}
+                onUpdate={handleUpdate}
+              />
             ) : null
           )}
         </div>
       ) : (
-        <div className="text-center text-gray-600 text-xl">
-          No records found.
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <AddRecordCard
+            onAddRecord={handleAddRecord}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            uniqueStyles={uniqueStyles}
+          />
+          <div className="text-center text-gray-600 text-xl col-span-full">
+            No records found.
+          </div>
         </div>
       )}
 
+      <AddRecordButton onClick={() => setIsModalOpen(true)} />
 
       {(searchTerm || searchStyle || searchCountry || yearSort) && (
         <div className="text-center mt-4 text-gray-600">

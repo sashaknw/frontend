@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export default function NavBar() {
+export default function NavBar({ cartItemCount = 0 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -10,7 +10,7 @@ export default function NavBar() {
         {/* Logo */}
         <Link to="/" className="text-white text-xl font-bold flex items-center">
           <img
-            src="/records/placeholder.png"
+            src="/TranceManiaLogo.png"
             alt="Logo"
             className="h-20 w-27 mr-2"
           />
@@ -36,6 +36,12 @@ export default function NavBar() {
             className="text-gray-300 hover:text-white transition-colors"
           >
             About
+          </Link>
+          <Link
+            to="/cart"
+            className="text-gray-300 hover:text-white transition-colors"
+          >
+            Cart ({cartItemCount})
           </Link>
         </div>
 
@@ -64,11 +70,11 @@ export default function NavBar() {
               Home
             </Link>
             <Link
-              to="/products"
+              to="/records"
               className="text-gray-300 hover:text-white transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Products
+              Records
             </Link>
             <Link
               to="/about"
@@ -76,6 +82,13 @@ export default function NavBar() {
               onClick={() => setIsMenuOpen(false)}
             >
               About
+            </Link>
+            <Link
+              to="/cart"
+              className="text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Cart ({cartItemCount})
             </Link>
           </div>
         </div>

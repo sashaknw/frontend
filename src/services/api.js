@@ -1,103 +1,82 @@
+// services/api.js
+const BASE_URL = 
+    "https://backend-wrw5.onrender.com/api"; // Replace with your Render URL
+    
 
-const BASE_URL = "http://localhost:5005";
+    console.log("Current API URL:", BASE_URL); 
 
-
-
-export const fetchRecords = async () => {
+const fetchApi = async (endpoint, options = {}) => {
   try {
-    const response = await fetch(`${BASE_URL}/records`);
+    const response = await fetch(`${BASE_URL}${endpoint}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log("Fetched records:", data); 
-
-    return data; 
-  } catch (error) {
-    console.error("Error fetching records:", error);
-    throw error;
-  }
-};
-
-export const filterRecordsByStyle = async (style) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/records?style=${encodeURIComponent(style)}`
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
     return await response.json();
   } catch (error) {
-    console.error(`Error filtering records by style ${style}:`, error);
+    console.error(`API Error (${endpoint}):`, error);
     throw error;
   }
 };
 
-export const filterRecordsByYear = async (year) => {
-  try {
-    const response = await fetch(`${BASE_URL}/records?released=${year}`);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(`Error filtering records by year ${year}:`, error);
-    throw error;
-  }
+// Get all records
+export const fetchRecords = () => fetchApi("/records");
+
+// Get a single record by ID
+export const fetchRecord = (id) => fetchApi(`/records/${id}`);
+
+// Add a new record
+export const addRecord = (record) => {
+  console.log("API call image length:", record.image?.length);
+  return fetchApi("/records", {
+    method: "POST",
+    body: JSON.stringify(record),
+  });
 };
 
-export const filterRecordsByCountry = async (country) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/records?country=${encodeURIComponent(country)}`
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(`Error filtering records by country ${country}:`, error);
-    throw error;
-  }
-};
+// Update a record
+export const updateRecord = (id, record) =>
+  fetchApi(`/records/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(record),
+  });
 
+// Delete a record
+export const deleteRecord = (id) =>
+  fetchApi(`/records/${id}`, {
+    method: "DELETE",
+  }).then(() => true);
 
-export const searchRecords = async (params) => {
+// Filter records by style
+export const filterRecordsByStyle = (style) =>
+  fetchApi(`/records?style=${encodeURIComponent(style)}`);
+
+// Filter records by year
+export const filterRecordsByYear = (year) =>
+  fetchApi(`/records?released=${year}`);
+
+// Filter records by country
+export const filterRecordsByCountry = (country) =>
+  fetchApi(`/records?country=${encodeURIComponent(country)}`);
+
+// Filter records by price range
+export const filterRecordsByPriceRange = (minPrice, maxPrice) =>
+  fetchApi(`/records?price_gte=${minPrice}&price_lte=${maxPrice}`);
+
+// Search records with multiple parameters
+export const searchRecords = (params) => {
   const queryString = new URLSearchParams(
-    Object.fromEntries(Object.entries(params).filter(([_, v]) => v != null))
+    Object.fromEntries(
+      Object.entries(params).filter(([_, v]) => v != null && v !== "")
+    )
   ).toString();
 
-  try {
-    const response = await fetch(`${BASE_URL}/records/search?${queryString}`);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error searching records:", error);
-    throw error;
-  }
+  return fetchApi(`/records?${queryString}`);
 };
-
-
-export const filterRecordsByPriceRange = async (minPrice, maxPrice) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/records?minPrice=${minPrice}&maxPrice=${maxPrice}`
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(
-      `Error filtering records by price range ${minPrice}-${maxPrice}:`,
-      error
-    );
-    throw error;
-  }
-};
-
