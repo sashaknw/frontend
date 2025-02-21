@@ -15,9 +15,11 @@ const ImageCarousel = () => {
     "/carousel/11.png",
   ];
 
+   const doubledImages = [...images, ...images];
+
   return (
-    <div className="w-screen relative">
-      <div className="absolute bottom-0 left-0 w-full bg-[#1a1a1a] min-h-[300px] z-0"></div>
+    <div className="w-screen relative overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-screen bg-[#1a1a1a] min-h-[300px] z-0"></div>
       <Swiper
         modules={[Autoplay]}
         spaceBetween={-80} // Negative space to create overlap
@@ -26,10 +28,10 @@ const ImageCarousel = () => {
         loop={true}
         speed={2500}
         autoplay={{
-          delay: 2500,
+          delay: 500,
           disableOnInteraction: false,
         }}
-        className="w-screen h-[400px] relative z-10"
+        className="w-full h-[400px] relative z-10"
       >
         {images.map((image, index) => (
           <SwiperSlide
@@ -48,7 +50,7 @@ const ImageCarousel = () => {
               <img
                 src={image}
                 alt={`Slide ${index + 1}`}
-                className="w-[280px] h-[300px] object-cover rounded-lg shadow-lg"
+                className="w-[300px] h-[310px] object-cover rounded-lg shadow-lg"
               />
             </div>
           </SwiperSlide>
