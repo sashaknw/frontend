@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CartPage = ({ cart, removeFromCart, updateCartItemQuantity }) => {
   const [itemToRemove, setItemToRemove] = useState(null);
@@ -27,10 +28,10 @@ const CartPage = ({ cart, removeFromCart, updateCartItemQuantity }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 relative">
+    <div className=" px-4 py-8 bg-[#1a1a1a] relative">
       {/* Confirmation Modal */}
       {itemToRemove && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-[#1a1a1a] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full">
             <h2 className="text-xl font-bold mb-4 text-center text-black">
               Are you sure you want to remove item(s) from cart?
@@ -53,7 +54,9 @@ const CartPage = ({ cart, removeFromCart, updateCartItemQuantity }) => {
         </div>
       )}
 
-      <h1 className="text-3xl font-bold mb-6 text-center">Your Cart</h1>
+      <h1 className="text-3xl font-sans font-bold mb-6 text-center">
+        ____________________________________________ your cart
+      </h1>
 
       {cart.length === 0 ? (
         <p className="text-center text-gray-700">Your cart is empty</p>
@@ -120,9 +123,12 @@ const CartPage = ({ cart, removeFromCart, updateCartItemQuantity }) => {
             <div className="text-xl font-bold">
               Total: €{calculateTotal().toFixed(2)}
             </div>
-            <button className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition-colors">
+            <Link
+              to="/checkout"
+              className="bg-[#5ace8f] text-black font-bold px-6 py-2 rounded-xl hover:bg-gray-800 transition-colors"
+            >
               Proceed to Checkout
-            </button>
+            </Link>
           </div>
         </div>
       )}

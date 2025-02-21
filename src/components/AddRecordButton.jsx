@@ -2,7 +2,7 @@ const AddRecordButton = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="fixed bottom-8 right-8 bg-blue-500 text-white w-16 h-16 rounded-full shadow-lg hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center z-50"
+      className="fixed bottom-8 right-8 bg-white text-black w-16 h-16 rounded-full shadow-lg hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center z-50"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

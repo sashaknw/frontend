@@ -73,7 +73,7 @@ const RecordCard = ({
       >
         <div className="relative">
           <img
-            src={image || "/records/.png"}    /// aqui pilla 
+            src={image || "/records/.png"} /// aqui pilla
             alt={`${artist} - ${title}`}
             className="w-full h-64 object-cover"
             onError={(e) => {
@@ -81,6 +81,17 @@ const RecordCard = ({
               e.target.src = "/records/.png";
             }}
           />
+          {/* Best Price !!! */}
+          {parseFloat(price) <= 3 && (
+            <div className="absolute top-2 left-2">
+              <img
+                src="/BestPriceSticker.gif"
+                alt="Best Price"
+                className="w-20 h-20 object-contain"
+              />
+            </div>
+          )}
+
           <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded">
             €{price}
           </div>
@@ -124,7 +135,7 @@ const RecordCard = ({
             onClick={handleAddToCart}
             className="w-full flex items-center justify-center px-4 py-2 
         bg-black text-white 
-        hover:bg-white hover:text-black 
+        hover:bg-white hover:text-black hover:bg-[#5ace8f]
         rounded-xl 
         transition-colors 
         text-sm"

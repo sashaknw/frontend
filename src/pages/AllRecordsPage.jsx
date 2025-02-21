@@ -135,7 +135,7 @@ const AllRecordsPage = ({ addToCart }) => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+       <img src="/loading.gif" alt="loading gif" className="w-96 " />
       </div>
     );
   }
@@ -152,9 +152,9 @@ const AllRecordsPage = ({ addToCart }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 relative bg-[#1a1a1a] min-h-screen text-white">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Our Vinyl Collection
+    <div className="w-screen  px-16 py-8 relative bg-[#1a1a1a] min-h-screen text-white">
+      <h1 className="text-5xl font-sans font-bold text-right mb-10 mr-14 ">
+        __________________________________ our records
       </h1>
 
       <div className="mb-8 flex flex-wrap justify-center gap-4">

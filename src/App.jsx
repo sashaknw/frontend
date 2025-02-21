@@ -6,54 +6,52 @@ import AllRecordsPage from "./pages/AllRecordsPage";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CartPage from "./pages/CartPage";
+import NotFound from "./pages/PageNotFound.jsx"; 
 
 function App() {
-  // Load cart from local storage on initial render
+  
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // Save cart to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // Add to cart function
+  
   const addToCart = (record) => {
-    // Validate record before adding
+  
     if (!record || !record.id) {
       console.error("Invalid record", record);
       return;
     }
 
     setCart((prevCart) => {
-      // Check if item already exists in cart
+      
       const existingItem = prevCart.find((item) => item.id === record.id);
 
       if (existingItem) {
-        // If exists, increase quantity
+       
         return prevCart.map((item) =>
           item.id === record.id
             ? {
                 ...item,
-                quantity: Math.min((item.quantity || 1) + 1, 10), // Limit to 10 items
+                quantity: Math.min((item.quantity || 1) + 1, 10), 
               }
             : item
         );
       }
 
-      // If new item, add with quantity 1
+      
       return [...prevCart, { ...record, quantity: 1 }];
     });
   };
 
-  // Remove from cart function
   const removeFromCart = (recordId) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== recordId));
   };
 
-  // Update quantity function
   const updateCartItemQuantity = (recordId, newQuantity) => {
     setCart((prevCart) =>
       prevCart
@@ -61,7 +59,7 @@ function App() {
           item.id === recordId
             ? {
                 ...item,
-                quantity: Math.min(newQuantity, 10), // Limit to 10 items
+                quantity: Math.min(newQuantity, 10), 
               }
             : item
         )
@@ -69,7 +67,7 @@ function App() {
     );
   };
 
-  // Clear entire cart
+  
   const clearCart = () => {
     setCart([]);
   };
@@ -84,7 +82,7 @@ function App() {
           )}
         />
 
-        <main className="container mx-auto px-4 flex-grow">
+        <main className="  flex-grow bg-[#1a1a1a]">
           <Routes>
             <Route path="/about" element={<AboutPage />} />
             <Route
@@ -103,6 +101,7 @@ function App() {
                 />
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

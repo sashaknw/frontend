@@ -30,12 +30,12 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const fullImage = reader.result; // This is the full base64 string
+        const fullImage = reader.result;
         setFormData((prev) => ({
           ...prev,
-          image: fullImage, // Save the full image to the form data
+          image: fullImage,
         }));
-        setImagePreview(fullImage); // Use the same full image for preview
+        setImagePreview(fullImage);
       };
       reader.readAsDataURL(file);
     }
@@ -69,7 +69,13 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
 
     setIsSubmitting(true);
     try {
-      const updatedRecord = await updateRecord(record.id, formData);
+      const updatedRecord = await updateRecord(record.id, {
+        ...formData,
+        style:
+          formData.style === "Other"
+            ? customStyle.trim()
+            : formData.style.trim(),
+      });
       onUpdate(updatedRecord);
       onClose();
     } catch (error) {
@@ -81,12 +87,12 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-8 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-white p-8 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl border border-gray-300">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Edit Record</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Edit Record</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-600 hover:text-gray-900 text-3xl font-light"
           >
             ×
           </button>
@@ -98,9 +104,8 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Required fields */}
-          <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <input
               type="text"
               name="artist"
@@ -108,8 +113,11 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
               onChange={handleChange}
               placeholder="Artist *"
               required
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <input
               type="text"
               name="title"
@@ -117,32 +125,33 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
               onChange={handleChange}
               placeholder="Title *"
               required
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Optional fields */}
-          <div className="space-y-4">
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <input
               type="text"
               name="label"
               value={formData.label}
               onChange={handleChange}
               placeholder="Label"
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <input
               type="text"
               name="country"
               value={formData.country}
               onChange={handleChange}
               placeholder="Country"
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Numeric inputs */}
-          <div className="space-y-4">
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <input
               type="number"
               name="released"
@@ -151,27 +160,16 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
               placeholder="Release Year"
               min="1900"
               max={new Date().getFullYear()}
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-            />
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              placeholder="Price"
-              min="0"
-              step="0.01"
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Style selection */}
-          <div className="space-y-4">
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <select
               name="style"
               value={formData.style}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select Style</option>
               {uniqueStyles.map((style) => (
@@ -188,55 +186,67 @@ const EditRecordForm = ({ record, onClose, onUpdate, uniqueStyles = [] }) => {
                 value={customStyle}
                 onChange={(e) => setCustomStyle(e.target.value)}
                 placeholder="Enter custom style"
-                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+                className="mt-2 w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             )}
           </div>
 
-          {/* RPM input */}
-          <input
-            type="text"
-            name="rpm"
-            value={formData.rpm}
-            onChange={handleChange}
-            placeholder="RPM (e.g. 45 RPM)"
-            className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-          />
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              placeholder="Price"
+              min="0"
+              step="0.01"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          {/* Image Upload */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-              Cover Image (Max 5MB)
-            </label>
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+            <select
+              name="rpm"
+              value={formData.rpm}
+              onChange={handleChange}
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select RPM</option>
+              <option value="33">33 RPM</option>
+              <option value="45">45 RPM</option>
+              <option value="78">78 RPM</option>
+            </select>
+          </div>
+
+          <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <input
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
-              className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+              className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {imagePreview && (
               <img
                 src={imagePreview}
                 alt="Cover Preview"
-                className="mt-4 w-32 h-32 object-cover rounded"
+                className="mt-4 w-32 h-32 object-cover rounded mx-auto"
               />
             )}
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex justify-between mt-6 pt-4 border-t">
+          <div className="flex justify-between mt-8 pt-4 border-t border-gray-200">
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="px-6 py-2 bg-white text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="px-6 py-2 bg-black text-white rounded-xl hover:bg-white hover:text-black transition-colors disabled:opacity-50"
             >
               {isSubmitting ? "Saving..." : "Save Changes"}
             </button>

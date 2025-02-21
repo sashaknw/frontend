@@ -120,187 +120,202 @@ const AddRecordCard = ({
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <>
-      <div
-        onClick={() => setIsModalOpen(true)}
-        className="border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors duration-300 h-full min-h-[400px] rounded-lg"
+return (
+  <>
+    <div
+      onClick={() => setIsModalOpen(true)}
+      className="border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors duration-300 h-full min-h-[400px] rounded-lg"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-16 h-16 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-16 h-16 text-gray-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 4v16m8-8H4"
-          />
-        </svg>
-        <p className="text-gray-600 mt-4">Add New Record</p>
-      </div>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 4v16m8-8H4"
+        />
+      </svg>
+      <p className="text-gray-600 mt-4">Add New Record</p>
+    </div>
 
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold mb-6">Add New Record</h2>
-            {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded">
-                {error}
-              </div>
-            )}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Required fields */}
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  name="artist"
-                  value={formData.artist}
-                  onChange={handleChange}
-                  placeholder="Artist *"
-                  required
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                />
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Title *"
-                  required
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                />
-              </div>
+    {isModalOpen && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-8 rounded-lg w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-xl border border-gray-300">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Add New Record</h2>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="text-gray-600 hover:text-gray-900 text-3xl font-light"
+            >
+              ×
+            </button>
+          </div>
 
-              {/* Optional fields */}
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  name="label"
-                  value={formData.label}
-                  onChange={handleChange}
-                  placeholder="Label"
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                />
-                <input
-                  type="text"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                  placeholder="Country"
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                />
-              </div>
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded">
+              {error}
+            </div>
+          )}
 
-              {/* Numeric inputs */}
-              <div className="space-y-4">
-                <input
-                  type="number"
-                  name="released"
-                  value={formData.released}
-                  onChange={handleChange}
-                  placeholder="Release Year"
-                  min="1900"
-                  max={new Date().getFullYear()}
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                />
-                <input
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleChange}
-                  placeholder="Price"
-                  min="0"
-                  step="0.01"
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                />
-              </div>
-
-              {/* Style selection */}
-              <div className="space-y-4">
-                <select
-                  name="style"
-                  value={formData.style}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
-                >
-                  <option value="">Select Style</option>
-                  {uniqueStyles.map((style) => (
-                    <option key={style} value={style}>
-                      {style}
-                    </option>
-                  ))}
-                  <option value="Other">Other</option>
-                </select>
-
-                {formData.style === "Other" && (
-                  <input
-                    type="text"
-                    value={customStyle}
-                    onChange={(e) => setCustomStyle(e.target.value)}
-                    placeholder="Enter custom style"
-                    className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
-                  />
-                )}
-              </div>
-
-              {/* RPM input */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Each input group now in a bordered container */}
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
               <input
                 type="text"
+                name="artist"
+                value={formData.artist}
+                onChange={handleChange}
+                placeholder="Artist *"
+                required
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Title *"
+                required
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <input
+                type="text"
+                name="label"
+                value={formData.label}
+                onChange={handleChange}
+                placeholder="Label"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <input
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Country"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <input
+                type="number"
+                name="released"
+                value={formData.released}
+                onChange={handleChange}
+                placeholder="Release Year"
+                min="1900"
+                max={new Date().getFullYear()}
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Continue this pattern for other inputs */}
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <select
+                name="style"
+                value={formData.style}
+                onChange={handleChange}
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select Style</option>
+                {uniqueStyles.map((style) => (
+                  <option key={style} value={style}>
+                    {style}
+                  </option>
+                ))}
+                <option value="Other">Other</option>
+              </select>
+
+              {formData.style === "Other" && (
+                <input
+                  type="text"
+                  value={customStyle}
+                  onChange={(e) => setCustomStyle(e.target.value)}
+                  placeholder="Enter custom style"
+                  className="mt-2 w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              )}
+            </div>
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                placeholder="Price"
+                min="0"
+                step="0.01"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <select
                 name="rpm"
                 value={formData.rpm}
                 onChange={handleChange}
-                placeholder="RPM (e.g. 45 RPM)"
-                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-500"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select RPM</option>
+                <option value="33">33 RPM</option>
+                <option value="45">45 RPM</option>
+                <option value="78">78 RPM</option>
+              </select>
+            </div>
+
+            {/* Image Upload Section */}
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-
-              {/* Image Upload */}
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Cover Image (Max 5MB)
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Cover Preview"
+                  className="mt-4 w-32 h-32 object-cover rounded mx-auto"
                 />
-                {imagePreview && (
-                  <img
-                    src={imagePreview}
-                    alt="Cover Preview"
-                    className="mt-4 w-32 h-32 object-cover rounded"
-                  />
-                )}
-              </div>
+              )}
+            </div>
 
-              <div className="flex justify-between mt-6 pt-4 border-t">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  disabled={isSubmitting}
-                  className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-                >
-                  {isSubmitting ? "Adding..." : "Add Record"}
-                </button>
-              </div>
-            </form>
-          </div>
+            {/* Action Buttons */}
+            <div className="flex justify-between mt-8 pt-4 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                disabled={isSubmitting}
+                className="px-6 py-2 bg-white text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                {isSubmitting ? "Adding..." : "Add Record"}
+              </button>
+            </div>
+          </form>
         </div>
-      )}
-    </>
-  );
+      </div>
+    )}
+  </>
+);
+  
 };
 
 export default AddRecordCard;

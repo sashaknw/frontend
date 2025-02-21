@@ -54,15 +54,14 @@ const RecordDetails = ({
       />
     );
   }
-
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-8 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-white p-8 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl border border-gray-300">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Record Details</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Record Details</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-600 hover:text-gray-900 text-3xl font-light"
           >
             ×
           </button>
@@ -76,11 +75,11 @@ const RecordDetails = ({
 
         {/* Record Image */}
         {record.image && (
-          <div className="mb-6">
+          <div className="mb-6 flex justify-center">
             <img
               src={record.image}
               alt="Record Cover"
-              className="w-32 h-32 object-cover rounded"
+              className="w-48 h-48 object-cover rounded-lg shadow-md"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "/records/placeholder.png";
@@ -91,59 +90,38 @@ const RecordDetails = ({
 
         {/* Record Details */}
         <div className="space-y-4">
-          <div>
-            <h3 className="font-semibold">Artist</h3>
-            <p className="text-gray-700">{record.artist || "—"}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Title</h3>
-            <p className="text-gray-700">{record.title || "—"}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Label</h3>
-            <p className="text-gray-700">{record.label || "—"}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Country</h3>
-            <p className="text-gray-700">{record.country || "—"}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Released</h3>
-            <p className="text-gray-700">{record.released || "—"}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Style</h3>
-            <p className="text-gray-700">{record.style || "—"}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Price</h3>
-            <p className="text-gray-700">{formatPrice(record.price)}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">RPM</h3>
-            <p className="text-gray-700">{record.rpm || "—"}</p>
-          </div>
+          {[
+            { label: "Artist", value: record.artist },
+            { label: "Title", value: record.title },
+            { label: "Label", value: record.label },
+            { label: "Country", value: record.country },
+            { label: "Released", value: record.released },
+            { label: "Style", value: record.style },
+            { label: "Price", value: formatPrice(record.price) },
+            { label: "RPM", value: record.rpm },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="border border-gray-200 rounded-lg p-3 bg-gray-50"
+            >
+              <h3 className="font-semibold text-gray-900 mb-1">{item.label}</h3>
+              <p className="text-gray-800">{item.value || "—"}</p>
+            </div>
+          ))}
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-between mt-8 pt-4 border-t">
+        <div className="flex justify-between mt-8 pt-4 border-t border-gray-200">
           <button
             onClick={() => setIsEditing(true)}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="px-6 py-2 bg-black text-white rounded-xl hover:bg-white hover:text-black transition-colors"
           >
             Edit
           </button>
           <button
             onClick={handleDelete}
             disabled={isDeleting}
-            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50"
+            className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
           >
             {isDeleting ? "Deleting..." : "Delete"}
           </button>

@@ -1,48 +1,46 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import CartIcon from "./CartIcon"; // Import the CartIcon component
 
 export default function NavBar({ cartItemCount = 0 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-0 p-4">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-[#1a1a1a] text-gray-100 py-0.5">
+      <div className="container mx-auto px-2 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-white text-xl font-bold flex items-center">
+        <Link
+          to="/"
+          className="text-white text-xl font-bold flex items-center pl-0"
+        >
           <img
-            src="/TranceManiaLogo.png"
+            src="/TranceManiaWhite.png"
             alt="Logo"
-            className="h-20 w-27 mr-2"
+            className="h-30 w-30 object-contain object-top overflow-hidden"
           />
-          <span>TranceMania</span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 items-center">
           <Link
             to="/"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-gray-300 hover:text-[#0e9387] transition-colors"
           >
             Home
           </Link>
           <Link
             to="/records"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-gray-300 hover:text-[#0e9387] transition-colors"
           >
             Records
           </Link>
           <Link
             to="/about"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-gray-300 hover:text-[#0e9387] transition-colors"
           >
             About
           </Link>
-          <Link
-            to="/cart"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Cart ({cartItemCount})
-          </Link>
+          <CartIcon cartItemCount={cartItemCount} />
         </div>
 
         {/* Hamburger Button */}
@@ -83,13 +81,7 @@ export default function NavBar({ cartItemCount = 0 }) {
             >
               About
             </Link>
-            <Link
-              to="/cart"
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Cart ({cartItemCount})
-            </Link>
+            <CartIcon cartItemCount={cartItemCount} />
           </div>
         </div>
       )}

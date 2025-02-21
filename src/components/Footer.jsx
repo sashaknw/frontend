@@ -1,9 +1,9 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1a1a1a] text-gray-100 py-10">
+    <footer className="bg-[#1a1a1a] text-gray-100 py-0">
       <div className="container mx-auto px-4 w-full grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo and Brand Section - Now on the left */}
         <div className="flex flex-col items-start space-y-4">
@@ -28,18 +28,18 @@ const Footer = () => {
           {/* Explore Links */}
           <nav className="flex flex-col ">
             <h6 className="font-bold mb-4 text-lg ">Explore</h6>
-            <Link to="/" className="text-gray-100 hover:text-gray-900 mb-2">
+            <Link to="/" className="text-gray-100 hover:text-[#0e9387] mb-2">
               Home
             </Link>
             <Link
               to="/records"
-              className="text-gray-100 hover:text-gray-900 mb-2"
+              className="text-gray-100 hover:text-[#0e9387] mb-2"
             >
               Our Collection
             </Link>
             <Link
               to="/about"
-              className="text-gray-100 hover:text-gray-900 mb-2"
+              className="text-gray-100 hover:text-[#0e9387] mb-2"
             >
               About Us
             </Link>
@@ -50,19 +50,19 @@ const Footer = () => {
             <h6 className="font-bold mb-4 text-lg">Legal</h6>
             <Link
               to="/terms"
-              className="text-gray-100 hover:text-gray-900 mb-2"
+              className="text-gray-100 hover:text-[#0e9387] mb-2"
             >
               Terms of Use
             </Link>
             <Link
               to="/privacy"
-              className="text-gray-100 hover:text-gray-900 mb-2"
+              className="text-gray-100 hover:text-[#0e9387] mb-2"
             >
               Privacy Policy
             </Link>
             <Link
               to="/cookies"
-              className="text-gray-100 hover:text-gray-900 mb-2"
+              className="text-gray-100 hover:text-[#0e9387] mb-2"
             >
               Cookie Policy
             </Link>

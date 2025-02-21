@@ -1,64 +1,61 @@
-import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
-const Carousel = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+import "swiper/css";
 
-  // Placeholder slides - replace with your actual content later
-  const slides = [{ id: 1 }, { id: 2 }, { id: 3 }];
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+const ImageCarousel = () => {
+  const images = [
+    "/carousel/4.png",
+    "/carousel/5.png",
+    "/carousel/6.png",
+    "/carousel/7.png",
+    "/carousel/8.png",
+    "/carousel/9.png",
+    "/carousel/10.png",
+    "/carousel/11.png",
+  ];
 
   return (
-    <div className="relative w-full h-96 overflow-hidden bg-gray-200">
-      {/* Slides container */}
-      <div
-        className="flex transition-transform duration-500 ease-out h-full"
-        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+    <div className="w-screen relative">
+      <div className="absolute bottom-0 left-0 w-full bg-[#1a1a1a] min-h-[300px] z-0"></div>
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={-80} // Negative space to create overlap
+        slidesPerView={"auto"} // Allow variable slide sizes
+        centeredSlides={true}
+        loop={true}
+        speed={2500}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        className="w-screen h-[400px] relative z-10"
       >
-        {slides.map((slide) => (
-          <div
-            key={slide.id}
-            className="w-full h-full flex-shrink-0 flex items-center justify-center bg-gray-300"
-          >
-            <p className="text-2xl text-gray-600">Slide {slide.id}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Navigation Buttons */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full"
-      >
-        ←
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full"
-      >
-        →
-      </button>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-        {slides.map((_, index) => (
-          <button
+        {images.map((image, index) => (
+          <SwiperSlide
             key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              currentSlide === index ? "bg-black" : "bg-gray-400"
-            }`}
-          />
+            className="!w-[300px] flex items-center justify-center"
+          >
+            <div
+              className="relative transform transition-transform duration-300 hover:scale-105"
+              style={{
+                transform: `rotate(${index % 3 === 0 ? -4 : 2}deg) translateX(${
+                  index % 2 === 0 ? "-15px" : "5px"
+                })`,
+                zIndex: index,
+              }}
+            >
+              <img
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className="w-[280px] h-[300px] object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };
 
-export default Carousel;
+export default ImageCarousel;

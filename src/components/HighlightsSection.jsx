@@ -53,13 +53,15 @@ const Highlights = () => {
   return (
     <div className="bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Highlights</h2>
+        <h2 className="text-4xl font-sans font-bold text-gray-900 mb-6">
+          ______________________________________________ highlights
+        </h2>
         <div className="relative">
           <div className="grid grid-cols-3 gap-6">
             {visibleHighlights.map((highlight) => (
               <div
                 key={highlight.id}
-                className="bg-gray-50 shadow-md rounded-md overflow-hidden"
+                className="bg-gray-50 shadow-md rounded-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
               >
                 <img
                   src={highlight.image}
@@ -72,7 +74,7 @@ const Highlights = () => {
                       href={highlight.URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg font-bold text-gray-900 mb-2 hover:text-blue-500"
+                      className="text-lg font-bold text-gray-900 mb-2 hover:text-[#5ace8f]"
                     >
                       {highlight.title}
                     </a>
