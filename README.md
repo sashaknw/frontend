@@ -1,8 +1,55 @@
-# React + Vite
+# TranceMania Records 🎵
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
+TranceMania Records es una tienda digital de música electrónica especializada en trance y techno. Ofrece una experiencia de compra intuitiva y visualmente atractiva para los amantes de la música electrónica.
 
-Currently, two official plugins are available:
+## 🛠️ Tecnologías Utilizadas
+- **Frontend:** React + Vite
+- **Estilos:** 100% Tailwind CSS
+- **Backend:** JSON Server
+- **Despliegue:** 
+  - Frontend: Netlify
+  - Backend: Render
+- **Gestión de Estado:** React Hooks
+- **Enrutamiento:** React Router
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Características Principales
+
+### 📀 Gestión de Discos
+- Visualización detallada de productos
+- Sistema de imágenes con fallback automático
+- Indicadores de ofertas especiales
+- Categorización por estilos musicales
+- Gestión completa de productos (CRUD)
+
+### 🛒 Carrito de Compras
+- Añadir/eliminar productos
+- Control de cantidad
+- Notificaciones toast
+- Confirmación de eliminación
+- Persistencia de datos
+
+### 🔍 Búsqueda y Filtros
+- Filtrado por estilo musical
+- Filtrado por año
+- Filtrado por país
+- Filtrado por rango de precios
+- Búsqueda multi-parámetro
+
+### 💻 Interfaz de Usuario
+- Diseño responsive
+- Carrusel interactivo
+- Animaciones y transiciones
+- Tema personalizado
+- Notificaciones y modales
+
+## 👤 Autora
+Sasha
+
+## 🔗 Enlaces
+- [Web en Producción](https://trancemania-records.netlify.app/)
+- [Repositorio Backend](https://github.com/tu-usuario/trancemania-backend)
+- [Documentación de la API](https://backend-wrw5.onrender.com/api)
+
+---
+⌨️ con ❤️ por Sasha
