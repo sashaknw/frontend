@@ -54,7 +54,7 @@ const CartPage = ({ cart, removeFromCart, updateCartItemQuantity }) => {
         </div>
       )}
 
-      <h1 className="text-3xl font-sans font-bold mb-6 text-center">
+      <h1 className="text-3xl font-sans font-bold mb-6 text-center text-white">
         ____________________________________________ your cart
       </h1>
 

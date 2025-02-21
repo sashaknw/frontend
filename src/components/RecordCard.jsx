@@ -135,7 +135,7 @@ const RecordCard = ({
             onClick={handleAddToCart}
             className="w-full flex items-center justify-center px-4 py-2 
         bg-black text-white 
-        hover:bg-white hover:text-black hover:bg-[#5ace8f]
+        hover:bg-[#5ace8f] hover:text-black 
         rounded-xl 
         transition-colors 
         text-sm"
