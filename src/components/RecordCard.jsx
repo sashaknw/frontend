@@ -91,10 +91,6 @@ const RecordCard = ({
               />
             </div>
           )}
-
-          <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded">
-            €{price}
-          </div>
         </div>
 
         <div className="p-4 flex-grow">
@@ -113,6 +109,12 @@ const RecordCard = ({
             </div>
             <div>
               <strong>RPM:</strong> {rpm}
+            </div>
+            <div className="col-span-2 mt-2">
+              <strong>Price: </strong>
+              <span className="text-lg font-bold text-[#1a1a1a]">
+                €{parseFloat(price).toFixed(2)}
+              </span>
             </div>
           </div>
 
