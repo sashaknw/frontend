@@ -22,7 +22,6 @@ const AllRecordsPage = ({ addToCart }) => {
         setIsLoading(true);
         const data = await fetchRecords();
 
-        // Validate and filter records
         const recordsToSet = Array.isArray(data) ? data : data.records || [];
         const validRecords = recordsToSet.filter(
           (record) => record && record.id && record.artist && record.title
@@ -123,7 +122,7 @@ const AllRecordsPage = ({ addToCart }) => {
   };
 
   const handleDelete = (deletedId) => {
-    // Update the records state immediately after successful deletion
+   
     setRecords((prevRecords) =>
       prevRecords.filter((record) => record.id !== deletedId)
     );

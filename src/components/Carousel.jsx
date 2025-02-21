@@ -22,8 +22,8 @@ const ImageCarousel = () => {
       <div className="absolute bottom-0 left-0 w-screen bg-[#1a1a1a] min-h-[300px] z-0"></div>
       <Swiper
         modules={[Autoplay]}
-        spaceBetween={-80} // Negative space to create overlap
-        slidesPerView={"auto"} // Allow variable slide sizes
+        spaceBetween={-80} //  overlap
+        slidesPerView={"auto"} 
         centeredSlides={true}
         loop={true}
         speed={2500}

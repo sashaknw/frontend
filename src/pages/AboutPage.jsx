@@ -7,7 +7,7 @@ const AboutPage = () => {
         </h1>
 
         <div className="grid md:grid-cols-2 gap-8 border-4 border-[#1a1a1a] rounded-lg overflow-hidden min-h-[800px]">
-          {/* Left side - Establishment Image and Location */}
+          {/* left side */}
           <div className="flex flex-col">
             <div className="h-[440px] mt-24 ml-14">
               <img
@@ -17,7 +17,7 @@ const AboutPage = () => {
               />
             </div>
 
-            {/* Location Section */}
+            {/* location section */}
             <div className="mt-1 text-center">
               <div className="flex flex-col items-center">
                 <br />
@@ -32,7 +32,7 @@ const AboutPage = () => {
             </div>
           </div>
 
-          {/* Right side - Text Content */}
+          {/* right side */}
           <div className="p-8 flex flex-col justify-center">
             <h2 className="text-4xl font-sans font-bold text-gray-900 mb-6 mt-0">
               Our Story: More Than Just a Record Store

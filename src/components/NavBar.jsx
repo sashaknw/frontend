@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CartIcon from "./CartIcon"; // Import the CartIcon component
+import CartIcon from "./CartIcon"; 
 
 export default function NavBar({ cartItemCount = 0 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,7 +8,7 @@ export default function NavBar({ cartItemCount = 0 }) {
   return (
     <nav className="bg-[#1a1a1a] text-gray-100 py-0.5">
       <div className="container mx-auto px-2 flex justify-between items-center">
-        {/* Logo */}
+      
         <Link
           to="/"
           className="text-white text-xl font-bold flex items-center pl-0"
@@ -20,7 +20,6 @@ export default function NavBar({ cartItemCount = 0 }) {
           />
         </Link>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link
             to="/"
@@ -42,8 +41,7 @@ export default function NavBar({ cartItemCount = 0 }) {
           </Link>
           <CartIcon cartItemCount={cartItemCount} />
         </div>
-
-        {/* Hamburger Button */}
+{/* hamburguesa */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden text-gray-300 hover:text-white"
@@ -56,7 +54,6 @@ export default function NavBar({ cartItemCount = 0 }) {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden mt-4">
           <div className="flex flex-col space-y-4 px-2">

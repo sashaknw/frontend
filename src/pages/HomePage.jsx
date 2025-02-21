@@ -50,7 +50,7 @@ const HomePage = () => {
 
         <Highlights />
 
-        {/* Notes section */}
+        {/* fundacion section */}
 
         <div className="bg-gray-50 py-12 w-full">
           <div className="max-w-7xl mx-auto mb-16 px- sm:px-6 lg:px-8  overflow-hidden">

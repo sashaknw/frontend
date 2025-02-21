@@ -73,7 +73,7 @@ const RecordDetails = ({
           </div>
         )}
 
-        {/* Record Image */}
+      
         {record.image && (
           <div className="mb-6 flex justify-center">
             <img
@@ -88,7 +88,7 @@ const RecordDetails = ({
           </div>
         )}
 
-        {/* Record Details */}
+   
         <div className="space-y-4">
           {[
             { label: "Artist", value: record.artist },
@@ -110,7 +110,7 @@ const RecordDetails = ({
           ))}
         </div>
 
-        {/* Action Buttons */}
+      
         <div className="flex justify-between mt-8 pt-4 border-t border-gray-200">
           <button
             onClick={() => setIsEditing(true)}

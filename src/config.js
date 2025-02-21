@@ -1,10 +1,10 @@
-// src/config.js
+
 const config = {
   development: {
     apiUrl: "http://localhost:5005/api",
   },
   production: {
-    apiUrl: "https://backend-wrw5.onrender.com/", // Replace with your actual Render URL
+    apiUrl: "https://backend-wrw5.onrender.com/", 
   },
 };
 

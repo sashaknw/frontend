@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "lucide-react"; // Using lucide-react for the cart icon
+import { ShoppingCart } from "lucide-react"; 
 
 const CartIcon = ({ cartItemCount }) => {
   return (

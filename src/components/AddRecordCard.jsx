@@ -76,12 +76,12 @@ const AddRecordCard = ({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const fullImage = reader.result; // This is the full base64 string
+        const fullImage = reader.result; 
         setFormData((prev) => ({
           ...prev,
-          image: fullImage, // Save the full image to the form data
+          image: fullImage, 
         }));
-        setImagePreview(fullImage); // Use the same full image for preview
+        setImagePreview(fullImage); 
       };
       reader.readAsDataURL(file);
     }
@@ -163,7 +163,7 @@ return (
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Each input group now in a bordered container */}
+       
             <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
               <input
                 type="text"
@@ -220,7 +220,7 @@ return (
               />
             </div>
 
-            {/* Continue this pattern for other inputs */}
+          
             <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
               <select
                 name="style"
@@ -274,7 +274,7 @@ return (
               </select>
             </div>
 
-            {/* Image Upload Section */}
+           
             <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
               <input
                 type="file"
@@ -291,7 +291,7 @@ return (
               )}
             </div>
 
-            {/* Action Buttons */}
+     
             <div className="flex justify-between mt-8 pt-4 border-t border-gray-200">
               <button
                 type="button"

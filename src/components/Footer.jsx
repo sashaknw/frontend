@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#1a1a1a] text-gray-100 py-0">
       <div className="container mx-auto px-4 w-full grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Logo and Brand Section - Now on the left */}
+      
         <div className="flex flex-col items-start space-y-4">
           <div className="flex items-center space-x-2 -ml-14">
             <img
@@ -25,7 +25,7 @@ const Footer = () => {
         <div></div>
 
         <div className="flex justify-between space-x-12 mt-10 ">
-          {/* Explore Links */}
+   
           <nav className="flex flex-col ">
             <h6 className="font-bold mb-4 text-lg ">Explore</h6>
             <Link to="/" className="text-gray-100 hover:text-[#0e9387] mb-2">
@@ -45,7 +45,7 @@ const Footer = () => {
             </Link>
           </nav>
 
-          {/* Legal Links */}
+       
           <nav className="flex flex-col">
             <h6 className="font-bold mb-4 text-lg">Legal</h6>
             <Link
