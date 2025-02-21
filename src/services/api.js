@@ -1,9 +1,8 @@
 // services/api.js
-const BASE_URL = 
-    "https://backend-wrw5.onrender.com/api"; // Replace with your Render URL
-    
+const BASE_URL =
+  import.meta.env.VITE_API_URL || "https://backend-wrw5.onrender.com/api";
 
-    console.log("Current API URL:", BASE_URL); 
+console.log("Current API URL:", BASE_URL);
 
 const fetchApi = async (endpoint, options = {}) => {
   try {

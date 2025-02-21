@@ -38,8 +38,7 @@ const AboutPage = () => {
               Our Story: More Than Just a Record Store
             </h2>
             <p className="text-lg text-gray-700 mb-4">
-              Founded in the heart of west London in 1976, TranceMania emerged
-              during the explosive punk era. What started as a small passion
+              Founded in the heart of Las Palmas in 2011, TranceMania started as a small passion
               project has grown into a sanctuary for music lovers, vinyl
               collectors, and sonic explorers.
             </p>
