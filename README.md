@@ -48,7 +48,7 @@ Sasha
 
 ## 🔗 Enlaces
 - [Web en Producción](https://trancemania-records.netlify.app/)
-- [Repositorio Backend](https://github.com/tu-usuario/trancemania-backend)
+- [Repositorio Backend](https://github.com/tu-usuario/backend)
 - [Documentación de la API](https://backend-wrw5.onrender.com/api)
 
 ---
