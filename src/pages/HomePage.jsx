@@ -1,6 +1,7 @@
 
 import Highlights from "../components/HighlightsSection";
 import ImageCarousel from "../components/Carousel";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -30,13 +31,13 @@ const HomePage = () => {
           />
           <div className="absolute top-1/3 right-4 sm:right-8 lg:right-64 transform -translate-y-1/2">
             <div className="flex flex-col items-start">
-            
-              <a
-                href="/records"
+              <Link
+                to="/records"
                 className="bg-[#5ace8f] text-black font-bold py-4 px-8 rounded-lg text-2xl hover:bg-[#1a1a1a] hover:text-white transition duration-300 shadow-lg inline-block"
               >
                 Explore Our Records
-              </a>
+              </Link>
+
               <div className="mt-6 text-gray-800 text-3xl font-bold shadow-text ml-auto">
                 <div className="max-w-md ml-auto">
                   Dive into a World of Sonic Exploration, Where Every Record
