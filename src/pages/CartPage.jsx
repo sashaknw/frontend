@@ -120,7 +120,7 @@ const CartPage = ({ cart, removeFromCart, updateCartItemQuantity }) => {
           ))}
 
           <div className="mt-8 flex justify-between items-center">
-            <div className="text-xl font-bold">
+            <div className="text-xl font-bold text-white">
               Total: €{calculateTotal().toFixed(2)}
             </div>
             <Link
